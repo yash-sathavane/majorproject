@@ -1,0 +1,110 @@
+<% layout("/layouts/boilerplate") %>
+<script>
+     const mapToken="<%=process.env.MAP_TOKEN%>";
+     const listing=<%-JSON.stringify(listings)%>;
+</script>
+<body>
+    <div class="row">
+     <div class="col-7 offset-2">   
+    <h3> <%= listings.title  %></h3>
+   
+
+    <div class="card scard" >
+        <img src="<%= listings.image.url%>" class="card-img-top" alt="listing-img">
+        <div class="card-body">
+          <p class="card-text">
+           <i>Owned by <%= listings.owner.username  %></i> <br>
+            <%= listings.description  %> <br>
+            &#8377;<%= listings.price.toLocaleString("en-IN")%> <br>
+            <%= listings.location%> <br>
+            <%= listings.country%> <br>
+        </p>
+        </div>
+      </div>
+     </div>
+    </div> 
+  
+  
+    <div class="btns row offset-2">
+        <%if(currentUser && listings.owner._id.equals(currentUser._id)){%>
+        <div class="col-2 ">
+        <a href="/listing/<%=listings._id%>/edit" class="btn btn-dark ">Edit </a>
+    </div>
+    <div class="col-8">
+        <form action="/listing/<%=listings._id%>?_method=DELETE" method="post">
+            <button class="btn btn-dark col-2">Delete</button>
+        </form>
+    </div> 
+    <% } %>  
+   </div>
+  
+<div class="col-7 offset-2 mt-3 mb-3">
+    <% if(currentUser){ %>
+   <h4>Leave a review</h4>
+   <form action="/listing/<%=listings._id%>/review" method="post" class="needs-validation" novalidate >
+   
+    <label for="rating">Rating</label>
+    <fieldset class="starability-slot">
+       
+        <legend></legend>
+      
+        <input type="radio" id="no-rate" class="input-no-rate" name="revi[rating]" value="0" checked aria-label="No rating." />
+        <input type="radio" id="first-rate1" name="revi[rating]" value="1" />
+        <label for="first-rate1" title="Terrible">1 star</label>
+        <input type="radio" id="first-rate2" name="revi[rating]" value="2" />
+        <label for="first-rate2" title="Not good">2 stars</label>
+        <input type="radio" id="first-rate3" name="revi[rating]" value="3" />
+        <label for="first-rate3" title="Average">3 stars</label>
+        <input type="radio" id="first-rate4" name="revi[rating]" value="4" />
+        <label for="first-rate4" title="Very good">4 stars</label>
+        <input type="radio" id="first-rate5" name="revi[rating]" value="5" />
+        <label for="first-rate5" title="Amazing">5 stars</label>
+      </fieldset>
+
+
+
+    <div>
+        <label for="comment" class="form-label">Comment</label>
+        <textarea name="revi[comment]" id="comment" class="form-control" required></textarea>
+        <div class="invalid-feedback">
+            Please add some comment.
+          </div>
+    </div>
+     <br>
+    <button class="btn btn-outline-dark">Submit</button>
+   </form>
+   <% } %> 
+   <hr>
+   <% if(listings.reviews.length>0){ %>
+   <div>
+    <p><b>All review</b></p>
+    <div class="row">
+    <% for(review of listings.reviews){ %>
+        <div class="card col-5 mb-3 ms-3">
+            <div class="card-body">
+                <h5 class="card-title">@<%=review.author.username%></h5>
+                <p class="starability-result card-text" data-rating="<%=review.rating%>"></p>
+                <p class="card-text"><%=review.comment%></p>
+               
+               
+             
+                <form action="/listing/<%=listings._id%>/review/<%=review._id%>?_method=DELETE" method="post">
+                    <button class="btn btn-dark btn-sm">delete</button>
+                </form>
+            </div>
+        </div>
+    <% } %> 
+</div>  
+</div>
+<% } %> 
+<div>
+    <h3>Where you'll be</h3>
+    <div id="map"></div>
+
+</div>
+   
+
+        
+</div>
+<script src="/js/map.js"></script>
+</body>

@@ -1,0 +1,104 @@
+body{
+ min-height: 100vh;
+ display: flex;
+ flex-direction: column;
+}
+.container{
+    flex:1;
+}
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+.nav-link{
+    color: #222 !important;
+}
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+
+/* footer */
+.f-info{
+    height: 8rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-evenly;
+    background-color: #ebebeb;
+}
+.f-info,.f-info-social,.f-info-link{
+    width: 100%;
+    text-align: center;
+    color: #222 !important;
+}
+.f-info-social .fa-brands{
+    font-size: 1.2rem;
+    margin-right:1rem;
+  }
+  .f-info-link a{
+    color: #222;
+    text-decoration: none;
+  }
+  .f-info-link a:hover{
+    text-decoration: underline;
+  }
+
+  /* card */
+.row{
+    padding: 1rem;
+}
+.hcard .card img{
+    size: cover;
+    height: 13rem;
+    border-radius: 2rem;
+}
+.hcard .card{
+    border: none !important;
+}
+.col,.row{
+    padding: 0.5rem;
+   
+}
+.t{
+    text-decoration: none !important;
+}
+.hcard .card-img-overlay{
+    opacity: 0;
+}
+.hcard .card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+.link{
+    text-decoration: none;
+}
+
+.scard img{
+    border-radius:2rem;
+    height: 15rem;
+}
+
+.scard{
+    border:none !important;
+}
+
+
+.add{
+    margin-top: 1rem;
+    background-color: #fe424d !important;
+   border: none !important;
+}
+
+/* .btns{
+    display: flex !important;
+    flex-wrap: wrap !important;
+    flex-direction: row;
+} */
+
+
+#map {
+   height: 400px;
+   width: 100vh;
+}
